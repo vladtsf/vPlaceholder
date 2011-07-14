@@ -17,66 +17,33 @@
 
 (function($, undefined) {
 
-  $.fn.vInputSwitch = function(effects) {
-    var ef = effects | false;
-    var placeholder = 'placeholder' in document.createElement('input');
+  $.fn.vInputSwitch = function() {
+    if(! ('placeholder' in document.createElement('input'))) {
+      $(this).each(function(index, element) {
+        var $element = $(element);
 
-    $(this).each(function(index, element) {
-      var $element = $(element);
-      if($element.is('input[type=text]')) {
-        if(placeholder) {
-          //HTML 5 Placeholders Branch
-          var value = $element.attr('value');
-          if(value !== undefined & value !== '') {
-            $element
-              .attr('placeholder', value)
-              .removeAttr('value');
-          }
-        } else {
-          //NON HTML 5 Branch
-          $element
-            .focusin(function(Event) {
-              var $target = $(Event.target);
-              if($target.val() == $target.data('viValue')) {
-                $target.val('');
-              }
-            })
-            .focusout(function(Event) {
-              var $target = $(Event.target);
-              if($target.val() == '') {
-                $target.val($target.data('viValue'));
-              }
-            })
-            .data('viValue', $element.val());
+        if($element.is('input[type=text]')) {
+            //IF HTML5 PLACEHOLDERS NOT SUPPORTED NATIVELY
+            if($element.attr('placeholder') !== undefined) {
+              $element
+                .focusin(function(Event) {
+                  var $target = $(Event.target);
+                  if($target.val() == $target.data('viValue')) {
+                    $target.val('');
+                  }
+                })
+                .focusout(function(Event) {
+                  var $target = $(Event.target);
+                  if($target.val() == '') {
+                    $target.val($target.data('viValue'));
+                  }
+                })
+                .data('viValue', $element.attr('placeholder'))
+                .val($element.attr('placeholder'));
+            }
         }
-
-         if(ef) {
-           $element
-             .hover(
-              function(Event) {
-                var $target = $(Event.target);
-                if(!$target.data('viOpacity')) {
-                  $target
-                    .clearQueue()
-                    .fadeTo(300, 1)
-                    .data('viOpacity', true);
-                }
-              },
-              function(Event) {
-                var $target = $(Event.target);
-                if($target.data('viOpacity')) {
-                  $target
-                    .clearQueue()
-                    .delay(300)
-                    .fadeTo(300, 0.5)
-                    .data('viOpacity', false);
-                }
-              }
-            )
-             .fadeTo(300, 0.5);
-         }
-      }
-    });
+      });
+    }
     return this;
   };
 
