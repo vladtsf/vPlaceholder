@@ -40,6 +40,7 @@
                 })
                 .data('viValue', $element.attr('placeholder'))
                 .val($element.attr('placeholder'));
+                
             }
         }
       });

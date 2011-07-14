@@ -6,14 +6,15 @@
     <script type="text/javascript" src="../vInputSwitch.jquery.js"></script>
     <script type="text/javascript">
       jQuery(document).ready(function($) {
-        $('input[type=text]').vInputSwitch();
+        $('input[type=text], textarea').vInputSwitch();
       });
     </script>
   </head>
   <body>
     <form method="get" action="#">
-      <input type="text" placeholder="Demo 1" value="" />
-	  <input type="text" placeholder="test" value="" />
+      <input type="text" placeholder="Test 1..." value="" />
+	  <input type="text" placeholder="Test 2..." value="" />
+	  <textarea placeholder="Test 3..."></textarea>
     </form>
   </body>
 </html>
