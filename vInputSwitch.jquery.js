@@ -19,24 +19,33 @@
 
   $.fn.vInputSwitch = function(effects) {
     var ef = effects | true;
+    var placeholder = 'placeholder' in document.createElement('input');
 
     $(this).each(function(index, element) {
       var $element = $(element);
       if($element.is('input[type=text]')) {
-        $element
-          .focusin(function(Event) {
-            var $target = $(Event.target);
-            if($target.val() == $target.data('viValue')) {
-              $target.val('');
-            }
-          })
-          .focusout(function(Event) {
-            var $target = $(Event.target);
-            if($target.val() == '') {
-              $target.val($target.data('viValue'));
-            }
-          })
-          .data('viValue', $element.val());
+        if(placeholder) {
+          //HTML 5 Placeholders Branch
+          $element
+            .attr('placeholder', $element.attr('value'))
+            .removeAttr('value');
+        } else {
+          //NON HTML 5 Branch
+          $element
+            .focusin(function(Event) {
+              var $target = $(Event.target);
+              if($target.val() == $target.data('viValue')) {
+                $target.val('');
+              }
+            })
+            .focusout(function(Event) {
+              var $target = $(Event.target);
+              if($target.val() == '') {
+                $target.val($target.data('viValue'));
+              }
+            })
+            .data('viValue', $element.val());
+        }
 
          if(ef) {
            $element
