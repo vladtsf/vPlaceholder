@@ -18,7 +18,7 @@
 (function($, undefined) {
 
   $.fn.vInputSwitch = function(effects) {
-    var ef = effects | true;
+    var ef = effects | false;
     var placeholder = 'placeholder' in document.createElement('input');
 
     $(this).each(function(index, element) {
