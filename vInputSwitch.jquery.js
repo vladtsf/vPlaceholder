@@ -22,7 +22,7 @@
       $(this).each(function(index, element) {
         var $element = $(element);
 
-        if($element.is('input[type=text]')) {
+        if($element.is('input[type=text]') | $element.is('textarea')) {
             //IF HTML5 PLACEHOLDERS NOT SUPPORTED NATIVELY
             if($element.attr('placeholder') !== undefined) {
               $element
