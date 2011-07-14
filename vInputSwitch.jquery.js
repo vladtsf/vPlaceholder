@@ -26,9 +26,12 @@
       if($element.is('input[type=text]')) {
         if(placeholder) {
           //HTML 5 Placeholders Branch
-          $element
-            .attr('placeholder', $element.attr('value'))
-            .removeAttr('value');
+          var value = $element.attr('value');
+          if(value !== undefined & value !== '') {
+            $element
+              .attr('placeholder', value)
+              .removeAttr('value');
+          }
         } else {
           //NON HTML 5 Branch
           $element
