@@ -1,5 +1,5 @@
 /*
- *  vInputSwitch - Lightweight jQuery input switch plugin
+ *  vPlaceholder - HTML5 input/textarea placeholder trick.
  *  Copyright (C) 2011  Vladimir Tsvang
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
 
 (function($, undefined) {
 
-  $.fn.vInputSwitch = function() {
+  $.fn.vPlaceholder = function() {
     if(! ('placeholder' in document.createElement('input'))) {
       $(this).each(function(index, element) {
         var $element = $(element);
@@ -40,7 +40,6 @@
                 })
                 .data('viValue', $element.attr('placeholder'))
                 .val($element.attr('placeholder'));
-                
             }
         }
       });
