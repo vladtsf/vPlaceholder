@@ -21,7 +21,16 @@
     if(! ('placeholder' in document.createElement('input'))) {
       $(this).each(function(index, element) {
         var $element = $(element);
-
+        
+        $('form:has(input.placeholdered)')
+          .submit(function(Event) {
+            $(this)
+            .find('.placeholdered')
+            .each(function(index, element) {
+              $(element).val('');
+            });
+          });
+        
         if($element.is('input[type=text]') | $element.is('textarea')) {
             //IF HTML5 PLACEHOLDERS NOT SUPPORTED NATIVELY
             if($element.attr('placeholder') !== undefined) {
@@ -30,16 +39,19 @@
                   var $target = $(Event.target);
                   if($target.val() == $target.data('viValue')) {
                     $target.val('');
+                  } else {
+                    $target.removeClass('placeholdered');
                   }
                 })
                 .focusout(function(Event) {
                   var $target = $(Event.target);
                   if($target.val() == '') {
-                    $target.val($target.data('viValue'));
+                    $target.val($target.data('viValue')).addClass('placeholdered');
                   }
                 })
                 .data('viValue', $element.attr('placeholder'))
-                .val($element.attr('placeholder'));
+                .val($element.attr('placeholder'))
+                .addClass('placeholdered');
             }
         }
       });
